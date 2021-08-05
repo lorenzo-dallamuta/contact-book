@@ -14,4 +14,4 @@ class PersonFilter(filters.FilterSet):
 
     class Meta:
         model = Person
-        fields = {'firstname', 'lastname'}
+        fields = {'firstName', 'lastName'}

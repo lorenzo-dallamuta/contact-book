@@ -1,46 +1,64 @@
 <template>
     <form id="contact-form">
         <label for="first-name">First name</label>
-        <input id="first-name" v-model="firstName">
+        <input id="first-name" v-model="contactName.firstName" />
         <label for="last-name">Last name</label>
-        <input id="last-name" v-model="lastName">
+        <input id="last-name" v-model="contactName.lastName" />
         <label for="department">Department</label>
-        <input id="department" v-model="department">
+        <input id="department" v-model="department" />
     </form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
+import { cloneDeep } from 'lodash'
 
 export default defineComponent({
-    name: "ContactForm",
-    data() {
+    name: 'ContactForm',
+    emits: ['nameChange', 'departmentChange'],
+    setup(props, { emit }) {
+        const contactName = ref({
+            firstName: '',
+            lastName: '',
+        })
+        const department = ref('')
+
+        watch(
+            () => cloneDeep(contactName),
+            (newData) => {
+                emit('nameChange', newData.value)
+            }
+        )
+
+        watch(department, (newData) => {
+            emit('departmentChange', newData)
+        })
+
         return {
-            firstName: "",
-            lastName: "",
-            department: ""
+            contactName,
+            department,
         }
-    }
+    },
 })
 </script>
 
 <style scoped>
-    label {
-        display: block;
-        padding: 1.2em 0.4em 0px;
-        text-align: left;
-        color: #696969
-    }
-    input {
-        width: 100%;
-        padding: 0.5em 0.2em 0em;
-        display: inline-block;
-        border: 1px solid #696969;
-        border-radius: 5px;
-        font-size: 1.0em;
-        font-weight: bold;
-    }
-    input:focus {
-        outline: none
-    }
+label {
+    display: block;
+    padding: 1.2em 0.4em 0px;
+    text-align: left;
+    color: #696969;
+}
+input {
+    width: 100%;
+    padding: 0.5em 0.2em 0em;
+    display: inline-block;
+    border: 1px solid #696969;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+}
+input:focus {
+    outline: none;
+}
 </style>

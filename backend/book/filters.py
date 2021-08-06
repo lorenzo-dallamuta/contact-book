@@ -5,7 +5,9 @@ from .models import Department, Person
 class DepartmentFilter(filters.FilterSet):
     class Meta:
         model = Department
-        fields = {'name'}
+        fields = {
+            'name': ['exact', 'iexact', 'contains']
+        }
 
 
 class PersonFilter(filters.FilterSet):
@@ -14,4 +16,7 @@ class PersonFilter(filters.FilterSet):
 
     class Meta:
         model = Person
-        fields = {'firstName', 'lastName'}
+        fields = {
+            'firstName': ['exact', 'iexact', 'contains'],
+            'lastName': ['exact', 'iexact', 'contains']
+        }

@@ -1,25 +1,30 @@
 <template>
-  <ContactDetail :contact="test" ></ContactDetail>
+    <ContactList :contacts="test"></ContactList>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import ContactDetail from "./components/ContactDetail.vue";
+import { defineComponent } from "vue";;
+import ContactList from "./components/ContactList.vue"
 
 export default defineComponent({
   name: "App",
   components: {
-    ContactDetail
+    ContactList
   },
   // TODO: remove temporary data stub
   data() {
       return {
-          test: {
+          test: [{
               firstName: "one",
               lastName: "two",
               phoneNumber: "three",
               department: "four",
-          }
+          }, {
+              firstName: "1",
+              lastName: "2",
+              phoneNumber: "3",
+              department: "4",
+          }]
       }
   }
 });

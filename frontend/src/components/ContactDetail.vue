@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { Contact } from "../types"
+import { Contact } from "@/types"
 
 export default defineComponent({
     name: "ContactDetail",

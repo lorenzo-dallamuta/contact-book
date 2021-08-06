@@ -1,6 +1,7 @@
-export type Contact = {
-    firstName: String;
-    lastName: String;
-    phoneNumber: String;
-    department: String;
+export type ContactInput = {
+    firstName: string;
+    lastName: string;
+    department: string;
 };
+
+export type Contact = ContactInput & { phoneNumber: string };

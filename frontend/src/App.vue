@@ -1,14 +1,16 @@
 <template>
     <div class="container">
-        <ContactForm id="contact-form"></ContactForm>
-        <ContactList id="contact-list" :contacts="test"></ContactList>
+        <ContactForm @contactInput="handleInput($event)"></ContactForm>
+        <ContactList id="contact-list" :contacts="[]"></ContactList>
     </div>
+    {{ contactInfo }}
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
 import ContactForm from "./components/ContactForm.vue"
 import ContactList from "./components/ContactList.vue"
+import { ContactInput } from "./types";
 
 export default defineComponent({
   name: "App",
@@ -19,20 +21,18 @@ export default defineComponent({
   created() {
       document.title = "Contact Book"
   },
-  // TODO: remove temporary data stub
   data() {
       return {
-          test: [{
-              firstName: "one",
-              lastName: "two",
-              phoneNumber: "three",
-              department: "four",
-          }, {
-              firstName: "1",
-              lastName: "2",
-              phoneNumber: "3",
-              department: "4",
-          }]
+          contactInfo: {
+              firstName: "",
+              lastName: "",
+              department: "",
+          }
+      }
+  },
+  methods: {
+      handleInput(newVal:ContactInput) {
+          this.contactInfo = newVal
       }
   }
 });

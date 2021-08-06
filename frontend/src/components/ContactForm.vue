@@ -1,24 +1,35 @@
 <template>
     <form id="contact-form">
         <label for="first-name">First name</label>
-        <input id="first-name" v-model="firstName">
+        <input id="first-name" v-model="contactInfo.firstName">
         <label for="last-name">Last name</label>
-        <input id="last-name" v-model="lastName">
+        <input id="last-name" v-model="contactInfo.lastName">
         <label for="department">Department</label>
-        <input id="department" v-model="department">
+        <input id="department" v-model="contactInfo.department">
     </form>
+    {{ contactInfo}}
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
+import { cloneDeep } from "lodash"
 
 export default defineComponent({
     name: "ContactForm",
-    data() {
-        return {
+    emits: ["contactInput"],
+    setup(props, {emit}) {
+        const contactInfo = ref({
             firstName: "",
             lastName: "",
             department: ""
+        })
+
+        watch(() => cloneDeep(contactInfo), (newData) => {
+            emit("contactInput", newData)
+        })
+
+        return {
+            contactInfo
         }
     }
 })

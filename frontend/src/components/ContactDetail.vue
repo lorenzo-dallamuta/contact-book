@@ -3,7 +3,7 @@
         First name: {{ contact.firstName }}<br>
         Last name: {{ contact.lastName }}<br>
         Department: {{ contact.department }}<br>
-        Phone number: {{ contact.phoneNumber }}<br>
+        Phone: {{ contact.phoneNumber }}<br>
     </div>
 </template>
 

@@ -7,11 +7,6 @@
         <label for="department">Department</label>
         <input id="department" v-model="department">
     </form>
-    <p>
-        first: {{ firstName }}
-        last: {{ lastName }}
-        dpt: {{ department }}
-    </p>
 </template>
 
 <script lang="ts">

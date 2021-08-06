@@ -38,10 +38,10 @@ export default defineComponent({
     },
     methods: {
         handleName(newData: ContactName) {
-            this.query = `?firstName=${newData.firstName}&lastName=${newData.lastName}`
+            this.query = `?firstName__contains=${newData.firstName}&lastName__contains=${newData.lastName}`
         },
         handleDepartment(newVal: string) {
-            this.query = `?department__name=${newVal}`
+            this.query = `?department__name__contains=${newVal}`
         },
     },
     watch: {

@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/ldm/.local/share/virtualenvs/acronis-L5zkpVO9/bin/python",
+    "python.pythonPath": "/home/ldm/.local/share/virtualenvs/backend-IPMbf_3A/bin/python",
     "editor.formatOnSave": true,
     "python.formatting.provider": "autopep8",
     "python.linting.enabled": true,

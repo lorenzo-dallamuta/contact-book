@@ -4,16 +4,15 @@
             @nameChange="handleName($event)"
             @departmentChange="handleDepartment($event)"
         ></ContactForm>
-        <ContactList id="contact-list" :contacts="[]"></ContactList>
+        <ContactList id="contact-list" :contacts="contacts"></ContactList>
     </div>
-    {{ query }}
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import ContactForm from './components/ContactForm.vue'
 import ContactList from './components/ContactList.vue'
-import { ContactName } from './types'
+import { ContactName, Contact } from './types'
 
 export default defineComponent({
     name: 'App',
@@ -26,22 +25,31 @@ export default defineComponent({
     },
     data() {
         return {
-            baseUrl: 'http://127.0.0.1:8000/api/people',
             query: '',
+            contacts: {
+                type: Array as PropType<Array<Contact>>,
+            },
         }
     },
     computed: {
         url(): string {
-            return this.baseUrl + this.query
+            return 'http://127.0.0.1:8000/api/people' + this.query
         },
     },
     methods: {
-        // handleName({firstName, lastName}: {firstName: string, lastName: string}) {
         handleName(newData: ContactName) {
             this.query = `?firstName=${newData.firstName}&lastName=${newData.lastName}`
         },
         handleDepartment(newVal: string) {
             this.query = `?department__name=${newVal}`
+        },
+    },
+    watch: {
+        url(newUrl) {
+            fetch(newUrl)
+                .then((response) => response.json())
+                .then((data) => (this.contacts = data))
+                .catch((error) => console.log(error))
         },
     },
 })

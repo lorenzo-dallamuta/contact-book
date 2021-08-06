@@ -1,17 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <ContactDetail :contact="test" ></ContactDetail>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import ContactDetail from "./components/ContactDetail.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    HelloWorld,
+    ContactDetail
   },
+  // TODO: remove temporary data stub
+  data() {
+      return {
+          test: {
+              firstName: "one",
+              lastName: "two",
+              phoneNumber: "three",
+              department: "four",
+          }
+      }
+  }
 });
 </script>
 
@@ -21,7 +31,5 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

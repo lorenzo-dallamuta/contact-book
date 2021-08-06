@@ -1,14 +1,17 @@
 <template>
+    <ContactForm></ContactForm>
     <ContactList :contacts="test"></ContactList>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";;
+import { defineComponent } from "vue"
+import ContactForm from "./components/ContactForm.vue"
 import ContactList from "./components/ContactList.vue"
 
 export default defineComponent({
   name: "App",
   components: {
+    ContactForm,
     ContactList
   },
   // TODO: remove temporary data stub

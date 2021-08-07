@@ -11,7 +11,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, debounce } from 'lodash'
+import useDebouncesRef from '@/composables/useDebouncedRef'
 
 export default defineComponent({
     name: 'ContactForm',
@@ -21,12 +22,15 @@ export default defineComponent({
             firstName: '',
             lastName: '',
         })
-        const department = ref('')
+        const department = useDebouncesRef('', 400)
 
         watch(
             () => cloneDeep(contactName),
             (newData) => {
-                emit('nameChange', newData.value)
+                console.log('got in')
+                debounce(() => {
+                    emit('nameChange', newData.value)
+                }, 400)()
             }
         )
 

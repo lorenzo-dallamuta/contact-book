@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import ContactForm from './components/ContactForm.vue'
 import ContactList from './components/ContactList.vue'
 import { ContactName, Contact } from './types'
@@ -22,26 +22,25 @@ export default defineComponent({
     },
     created() {
         document.title = 'Contact Book'
+        this.query = 'people/'
     },
     data() {
         return {
             query: '',
-            contacts: {
-                type: Array as PropType<Array<Contact>>,
-            },
+            contacts: new Array<Contact>(),
         }
     },
     computed: {
         url(): string {
-            return 'http://127.0.0.1:8000/api/people' + this.query
+            return 'http://127.0.0.1:8000/api/' + this.query
         },
     },
     methods: {
         handleName(newData: ContactName) {
-            this.query = `?firstName__contains=${newData.firstName}&lastName__contains=${newData.lastName}`
+            this.query = `people?firstName__contains=${newData.firstName}&lastName__contains=${newData.lastName}`
         },
         handleDepartment(newVal: string) {
-            this.query = `?department__name__contains=${newVal}`
+            this.query = `people?department__name__contains=${newVal}`
         },
     },
     watch: {

@@ -140,5 +140,4 @@ REST_FRAMEWORK = {
 # CORS headers settings (django-cors-headers)
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8080',
-    'http://172.24.223.215:8080'
 ]

@@ -5,12 +5,13 @@ from .models import Department, Person
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('name',)
+        fields = ('id', 'name',)
 
 
 class PersonSerializer(serializers.ModelSerializer):
-    department = serializers.StringRelatedField()
+    department = serializers.SlugRelatedField(
+        queryset=Department.objects.all(), slug_field="name")
 
     class Meta:
         model = Person
-        fields = ('firstName', 'lastName', 'phoneNumber', 'department',)
+        fields = ('id', 'firstName', 'lastName', 'phoneNumber', 'department',)

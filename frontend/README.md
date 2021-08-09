@@ -1,6 +1,6 @@
 # frontend
 
-TODO: the query should always contain all 3 parameters: firstName, lastName, department
+TODO: decide if the requests to the backend need debouncing - consider the issue of shorter filters needing more time to respond
 
 ## Project setup
 

@@ -1,46 +1,38 @@
 <template>
     <form id="contact-form">
         <label for="first-name">First name</label>
-        <input id="first-name" v-model="contactName.firstName" />
+        <input id="first-name" v-model="contactFilter.firstName" />
         <label for="last-name">Last name</label>
-        <input id="last-name" v-model="contactName.lastName" />
+        <input id="last-name" v-model="contactFilter.lastName" />
         <label for="department">Department</label>
-        <input id="department" v-model="department" />
+        <input id="department" v-model="contactFilter.department" />
     </form>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { cloneDeep, debounce } from 'lodash'
-import useDebouncesRef from '@/composables/useDebouncedRef'
+import { cloneDeep } from 'lodash'
 
 export default defineComponent({
     name: 'ContactForm',
-    emits: ['nameChange', 'departmentChange'],
+    emits: ['filterChange'],
     setup(props, { emit }) {
-        const contactName = ref({
+        const contactFilter = ref({
             firstName: '',
             lastName: '',
+            department: '',
         })
-        const department = useDebouncesRef('', 400)
 
         watch(
-            () => cloneDeep(contactName),
+            () => cloneDeep(contactFilter),
             (newData) => {
-                console.log('got in')
-                debounce(() => {
-                    emit('nameChange', newData.value)
-                }, 400)()
+                console.log(newData.value)
+                emit('filterChange', newData.value)
             }
         )
 
-        watch(department, (newData) => {
-            emit('departmentChange', newData)
-        })
-
         return {
-            contactName,
-            department,
+            contactFilter,
         }
     },
 })

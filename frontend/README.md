@@ -1,6 +1,6 @@
 # frontend
 
-TODO: debounce the updates to the query string
+TODO: decide if the requests to the backend need debouncing - consider the issue of shorter filters needing more time to respond
 
 ## Project setup
 
@@ -18,6 +18,12 @@ pnpm run serve
 
 ```
 pnpm run build
+```
+
+### Run your unit tests
+
+```
+pnpm run test:unit
 ```
 
 ### Lints and fixes files

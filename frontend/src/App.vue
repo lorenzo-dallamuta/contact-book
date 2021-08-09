@@ -1,9 +1,6 @@
 <template>
     <div class="container">
-        <ContactForm
-            @nameChange="handleName($event)"
-            @departmentChange="handleDepartment($event)"
-        ></ContactForm>
+        <ContactForm @filterChange="handleFilter($event)"></ContactForm>
         <ContactList id="contact-list" :contacts="contacts"></ContactList>
     </div>
 </template>
@@ -12,7 +9,7 @@
 import { defineComponent } from 'vue'
 import ContactForm from './components/ContactForm.vue'
 import ContactList from './components/ContactList.vue'
-import { ContactName, Contact } from './types'
+import { ContactFilter, Contact } from './types'
 
 export default defineComponent({
     name: 'App',
@@ -36,11 +33,10 @@ export default defineComponent({
         },
     },
     methods: {
-        handleName(newData: ContactName) {
-            this.query = `people?firstName__contains=${newData.firstName}&lastName__contains=${newData.lastName}`
-        },
-        handleDepartment(newVal: string) {
-            this.query = `people?department__name__contains=${newVal}`
+        handleFilter(newData: ContactFilter) {
+            console.log(newData)
+            this.query = `people?firstName__contains=${newData.firstName}&lastName__contains=${newData.lastName}&department__name__contains=${newData.department}`
+            console.log(this.query)
         },
     },
     watch: {

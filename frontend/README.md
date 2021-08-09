@@ -1,6 +1,6 @@
 # frontend
 
-TODO: debounce the updates to the query string
+TODO: the query should always contain all 3 parameters: firstName, lastName, department
 
 ## Project setup
 
@@ -18,6 +18,12 @@ pnpm run serve
 
 ```
 pnpm run build
+```
+
+### Run your unit tests
+
+```
+pnpm run test:unit
 ```
 
 ### Lints and fixes files
